@@ -2,7 +2,7 @@
 
 ## Synopsis
 
-This project is a management software for Mess Contractors where the students could inform the Contractor about their Availablity status for future meals. It helps the Contractor to save wastage on extra food and also bills the students for the particular meals that they ate during the course of a month. Only those students who are sure about their unavailablity for the next meal can change their status for next meal to  Unavailable(Atleast 4 hrs prior to the meal). By default the status would be Available. Entry in mess would only be guaranteed by the successfully scanning the BarCode for that meal.
+This project is a management software for Mess Contractors where the students could inform the Contractor about their Availablity status for future meals. It helps the Contractor to save wastage on extra food and also bills the students for the particular meals that they consumed during the course of a month. Only those students who are sure about their unavailablity for the next meal can change their status for next meal to  Unavailable(Atleast 4 hrs prior to the meal). By default the status would be Available. Entry in mess would only be guaranteed by the successfully scanning the BarCode for that meal.
 
 ## Motivation
 
