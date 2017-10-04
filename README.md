@@ -10,7 +10,10 @@ Every month 180 kg of food was wasted in Hostel J's mess in the year 2016-17. Th
 
 ## Installation
 
--- To be Decided --
+Install ReactJS on your machine. Follow installation on https://reactjs.org/docs/installation.html
+Clone the above project.
+Open the directory in the terminal.
+Enter command 'npm start'
 
 ## Tests
 
