@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import './App.css';
 import UserProfile from './components/userProfile';
-import { Switch,Route,withRouter} from 'react-router-dom';
+import {Router,Switch,Route} from 'react-router-dom';
 import Menu from './components/menu';
 import About from './components/about';
 import Home from './components/home';
@@ -14,14 +14,15 @@ class App extends Component {
     return (
       <div className="App">
         <CustomNavBar user = {UserProfile} />
-        <Switch>   
-          <Route path="/" component={Home} />
-          <Route path="/about" component={About} />
-          <Route path="/menu" component={Menu} />
-        </Switch>
+          <Switch> 
+            <Route exact path={"/"} component={Home} />
+            <Route path={"/about"} component={About} />
+            <Route path={"/menu"} component={Menu} />
+            <Route path={"/profile"} component={Home} />
+          </Switch>
       </div>
     );
   }
 }
 
-export default withRouter(App);
+export default App;

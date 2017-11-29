@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
-import {Navbar, Nav, NavItem,Modal,Button,FormGroup,FormControl} from 'react-bootstrap';
+import {Navbar, Nav, NavItem,Modal,Button,FormGroup,FormControl,HelpBlock} from 'react-bootstrap';
 import './loginModal.css';
 import axios from 'axios';
 import UserProfile from './userProfile';
 import { Link } from 'react-router-dom';
+
 import {withRouter} from 'react-router-dom';
 
 
@@ -13,7 +14,8 @@ class CustomNavBar extends Component{
         super();
         this.state = {
             showModal:false,
-            islogged:false
+            islogged:false,
+            error:null
         }
     }
 
@@ -37,9 +39,15 @@ class CustomNavBar extends Component{
             email:window.document.getElementById('email').value,
             password:window.document.getElementById('password').value,
         }).then(function(res){
-            // console.log(res.data.response);
-            UserProfile.setUser({name:res.data.response.name,id:res.data.response.id,level:"0"});
-            this.setState({ showModal: false,islogged:true});
+            console.log(res.data.response);
+            if(res.data.response.success==1){
+                UserProfile.setUser({name:res.data.response.name,id:res.data.response.id,level:"0"});
+                this.setState({ showModal: false,islogged:true});
+                this.props.history.push('/profile');
+            }else{
+                this.setState({error:'Username/Password is Incorrect'});
+            }
+            
         }.bind(this)).catch(function(error){
             console.log(error);
         });
@@ -83,6 +91,7 @@ class CustomNavBar extends Component{
                                     <FormGroup>
                                         <FormControl type="password" placeholder="Password" name="password" id="password"/>
                                     </FormGroup>
+                                    <HelpBlock>{this.state.error?this.state.error:""}</HelpBlock>
                                 <Button type="submit" name="login" className="btn btn-block loginmodal-submit">Login</Button>
                                 </form>
                                 <div className="login-help">

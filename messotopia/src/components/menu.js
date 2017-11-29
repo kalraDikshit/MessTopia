@@ -13,7 +13,6 @@ export default class Menu extends Component{
         const url = 'http://localhost:5000';
         if(this.props.user !== undefined && this.props.user.getUser().id!=null){
             axios.get(url + '/api/stdetail/'+props.user.getUser().id).then(function(result){
-                // console.log(result.data.response[0].hostelName);
                 const hostel = result.data.response[0].hostelName;
                 axios.get(url+'/api/messmenu/'+hostel).then(function(res){       
                     res.data.response.map(function(day,i){
