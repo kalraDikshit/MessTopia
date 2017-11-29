@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+
 // import react from 'react-dom';
 
 var UserProfile = (function() {

@@ -1,3 +1,4 @@
+
 var express = require('express');
 var pool = require('./components/dbconnection');
 var bodyParser = require('body-parser');
@@ -47,7 +48,7 @@ app.get('/api/stdetails/limit/:page',function(req,res,next){
 });
 
 
-app.get('/api/stdetails/:id',function(req,res,next){
+app.get('/api/stdetail/:id',function(req,res,next){
     pool.getConnection(function(err,connection){
         if(err){throw err};
         connection.query('Select * from stDetails where id='+(req.params.id),function(error,results,fields){
@@ -58,6 +59,19 @@ app.get('/api/stdetails/:id',function(req,res,next){
             }
         });
     });
+});
+
+app.get('/api/messmenu/:hostelname',function(req,res,next){
+    pool.getConnection(function(err,connection){
+        if(err){throw err};
+        connection.query(`Select * from mess_menu where hostel = "${req.params.hostelname}"`,function(error,results,fields){
+            connection.release();
+            if(error){res.send(JSON.stringify({"status":500,"error":error,"response":null}))}
+            else{
+                res.send(JSON.stringify({"status":200,"error":null,"response":results}));
+            }
+        });
+    })
 });
 
 //POST Requests
