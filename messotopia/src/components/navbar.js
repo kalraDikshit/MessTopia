@@ -39,11 +39,11 @@ export default class CustomNavBar extends Component{
             if(res.data.response.success===1){
                 UserProfile.setUser({name:res.data.response.name,id:res.data.response.id,level:"0"});
                 this.setState({ showModal: false,islogged:true});
+                console.log(this.props);
                 this.props.history.push('/profile');
             }else{
                 this.setState({error:'Username/Password is Incorrect'});
             }
-            
         }.bind(this)).catch(function(error){
             console.log(error);
         });

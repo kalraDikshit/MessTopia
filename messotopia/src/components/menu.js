@@ -11,7 +11,7 @@ export default class Menu extends Component{
             data:[],
         }
         const url = 'http://localhost:5000';
-        if(UserProfile.getUser().id !== undefined && UserProfile.getUser().id!==null){
+        if(UserProfile.getUser().id !== undefined && UserProfile.getUser().id!==null && UserProfile.getUser().level!==0){
             axios.get(url + '/api/stdetail/'+UserProfile.getUser().id).then(function(result){
                 const hostel = result.data.response[0].hostelName;
                 axios.get(url+'/api/messmenu/'+hostel).then(function(res){       
