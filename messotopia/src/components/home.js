@@ -14,8 +14,11 @@ export default class Home extends Component{
         }
         
         const url = 'http://localhost:5000';
-        axios.get(url+'/api/latesteat').then((response)=>{
-          console.log(response.data.response);
+        var d = new Date();
+        var meal = d.getHours()<12?'Lunch':'Dinner';
+        var date = (d.getFullYear()+"-"+(d.getMonth()+1)+"-"+d.getDate());
+        axios.get(url+'/api/latesteat/'+date+'/'+meal).then((response)=>{
+          console.log(response.data.response[0]);
           this.setState({
             students:response.data.response,
             isLoading:false
@@ -40,7 +43,7 @@ export default class Home extends Component{
             let lastName = student.name.split(' ')[1].toString().toLowerCase();
             let filterText = this.state.filterText.toString().toLowerCase();
             if(roll.includes(filterText) || firstName.includes(filterText) || lastName.includes(filterText) || (firstName+" "+lastName).includes(filterText) ){
-                updatedTable.push(( <tr key = {i++}><td>{i}</td><td>{student.rollNo}</td><td>{student.name.split(' ')[0]}</td><td>{student.name.split(' ')[1]}</td><td>{student.hostel}</td><td>{student.eating?<FaCheck/>:<FaClose/>}</td></tr>));
+                updatedTable.push(( <tr key = {i++}><td>{i}</td><td>{student.rollNo}</td><td>{student.name.split(' ')[0]}</td><td>{student.name.split(' ')[1]}</td><td>{student.hostelName}</td></tr>));
             }
         }.bind(this));
         if(updatedTable.length === 0){
@@ -54,7 +57,7 @@ export default class Home extends Component{
                   <FormControl type="text" id="filter" onChange = {this.handleUpdateInput.bind(this)} placeholder = "Enter Roll No. | Name"/>
               </FormGroup>
             </form>  
-            {this.state.isLoading && <Table striped bordered condensed hover>
+            {!this.state.isLoading && <Table striped bordered condensed hover>
                 <thead>
                     <tr>
                         <th>#</th>
@@ -62,7 +65,6 @@ export default class Home extends Component{
                         <th>First Name</th>
                         <th>Last Name</th>
                         <th>Hostel</th>
-                        <th>Eating?</th>
                     </tr>
                 </thead>
                 <tbody>

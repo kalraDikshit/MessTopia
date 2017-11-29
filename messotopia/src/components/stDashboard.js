@@ -21,12 +21,14 @@ export default class About extends Component{
             }.bind(this)).catch(function(error){
                 console.log(error);
             })
-            var meal = Date().split(' ')[4].split(':')[0]<12?'Lunch':'Dinner';
-            var date = (Date().split(' ')[1]+":"+Date().split(' ')[2]+":"+Date().split(' ')[3]);
+            var d = new Date();
+            var meal = d.getHours()<12?'Lunch':'Dinner';
+            var date = (d.getFullYear()+"-"+(d.getMonth()+1)+"-"+d.getDate());
             console.log(date);
             if((Date().split(' ')[4].split(':')[0]>10 && Date().split(' ')[4].split(':')[0]<12) || (Date().split(' ')[4].split(':')[0]>16 && Date().split(' ')[4].split(':')[0]<18)){
                 axios.get(url+'/api/latestmeal/'+UserProfile.getUser().id+'/'+(date)+'/'+meal).then(function(result){
-                    if(result.data.response[0].success===1){
+                    console.log(result);
+                    if(result.data.response.length===1){
                         this.setState({
                             isEating:false,
                             btn:`Eat ${meal}`
@@ -48,16 +50,33 @@ export default class About extends Component{
     }
     
     eat(){
+        var d = new Date();
+        var meal = d.getHours()<12?'Lunch':'Dinner';
+        var date = (d.getFullYear()+"-"+(d.getMonth()+1)+"-"+d.getDate());
         if(this.state.isEating){
-            
-            this.setState({
-                isEating:false,
+            axios.post('/api/latestmeal',{
+                id:UserProfile.getUser().id,
+                date:date,
+                hostel:this.state.hostelName,
+                meal:meal
+            }).then(function(response){
+                console.log(response);
+                this.setState({
+                    isEating:false,
+                    btn:`Eat ${meal}`
+                })                
+            }.bind(this)).catch(function(error){
+                console.log(error);
             })
         }else{
-
-
-            this.setState({
-                isEating:true,
+            axios.delete(`/api/latestmeal/${UserProfile.getUser().id}/${date}/${meal}`).then(function(response){
+                console.log(response);
+                this.setState({
+                    isEating:true,
+                    btn:`Cancel ${meal}`
+                })                
+            }.bind(this)).catch(function(error){
+                console.log(error);
             })
         }
     }
@@ -92,12 +111,12 @@ export default class About extends Component{
                 </tbody>
                 </Table>
                 <hr/>
-                <div class="row">
-                    <div class = "col-xs-12 col-md-12">
+                <div className="row">
+                    <div className = "col-xs-12 col-md-12">
                         <h3>Update Next Meal Status</h3>
 
                         {((Date().split(' ')[4].split(':')[0]>10 && Date().split(' ')[4].split(':')[0]<12) || (Date().split(' ')[4].split(':')[0]>16 && Date().split(' ')[4].split(':')[0]<18))?
-                        <Button className="btn btn-primary" onClick={this.eat.bind(this)}>{this.state.btn}</Button>:'Portal is closed.'}
+                        <Button className="btn btn-warning" onClick={this.eat.bind(this)}>{this.state.btn}</Button>:'Portal is closed.'}
                         
                     </div>
                 </div>
