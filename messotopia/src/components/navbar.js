@@ -7,7 +7,7 @@ import { Link } from 'react-router-dom';
 import {withRouter} from 'react-router-dom';
 
 
-export class CustomNavBar extends Component{
+class CustomNavBar extends Component{
 
     constructor(){
         super();
@@ -27,7 +27,6 @@ export class CustomNavBar extends Component{
     logout(){
         UserProfile.setUser({name:"",id:null,level:null});
         this.setState({islogged:false})
-        this.props.history.push('/');
     }
 
     submitForm(e){
@@ -56,8 +55,8 @@ export class CustomNavBar extends Component{
                 </Navbar.Header>
                 <Navbar.Collapse>
                     <Nav>
-                        <NavItem eventkey={1} componentClass="span" style={{}}><Link to="/about">About</Link></NavItem>
-                        {this.props.user.getUser().id!=null && <NavItem eventKey={3} ><Link to="/menu">Menu</Link></NavItem> }
+                        <NavItem eventkey={1} className="linkItem"><Link to="/about" >About</Link></NavItem>
+                        {this.props.user.getUser().id!=null && <NavItem eventKey={3} className="linkItem" ><Link to="/menu">Menu</Link></NavItem> }
                         {/* <NavItem eventKey={2} href="#">Link</NavItem>
                         <NavDropdown eventKey={3} title="Dropdown" id="basic-nav-dropdown">
                             <MenuItem eventKey={3.1}>Action</MenuItem>
@@ -68,10 +67,10 @@ export class CustomNavBar extends Component{
                         </NavDropdown> */}
                     </Nav>
                     <Nav pullRight>
-                    {this.props.user.getUser().id!=null && <NavItem eventKey={3} ><Link to="/profile">{this.props.user.getUser().name}</Link></NavItem> }
-                    { this.props.user.getUser().id!=null && <NavItem eventKey={2} onClick={this.logout.bind(this)}><Link to = '/'>Logout</Link></NavItem>
+                    {this.props.user.getUser().id!=null && <NavItem eventKey={3} className="linkItem" ><Link to="/profile">{this.props.user.getUser().name}</Link></NavItem> }
+                    { this.props.user.getUser().id!=null && <NavItem eventKey={2} onClick={this.logout.bind(this)} className="linkItem"><Link to = '/'>Logout</Link></NavItem>
                         }
-                        {this.props.user.getUser().id===null && <NavItem eventKey={2} href='#' onClick={this.on.bind(this)}>Login</NavItem>}   
+                        {this.props.user.getUser().id===null && <NavItem eventKey={2} href='#' onClick={this.on.bind(this)} className="linkItem">Login</NavItem>}   
                         <Modal show={this.state.showModal} onHide={this.close.bind(this)} className="loginmodal-container">
                             <Modal.Header closeButton>
                                 <Modal.Title>Login to your account</Modal.Title>
@@ -97,3 +96,8 @@ export class CustomNavBar extends Component{
         )
     }
 }
+
+
+
+
+export default withRouter(CustomNavBar);

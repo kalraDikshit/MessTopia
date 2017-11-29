@@ -1,13 +1,13 @@
 import React, { Component } from 'react';
 import './App.css';
 import UserProfile from './components/userProfile';
-import { Switch,Route} from 'react-router-dom';
+import { Switch,Route,withRouter} from 'react-router-dom';
 import Menu from './components/menu';
 import About from './components/about';
 import Home from './components/home';
 
 // import {Navbar, Button} from 'react-bootstrap';
-import {CustomNavBar} from './components/navbar';
+import CustomNavBar from './components/navbar';
 
 class App extends Component {
   render() {
@@ -24,4 +24,4 @@ class App extends Component {
   }
 }
 
-export default App;
+export default withRouter(App);

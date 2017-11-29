@@ -94,3 +94,14 @@
 .login-help{
   font-size: 12px;
 }
+
+.linkItem a{
+  color:#9d9d9d;
+  padding-bottom:15px;
+  padding-top:15px;
+  text-decoration: none
+}
+
+.linkItem:hover a{
+  color: white
+}
