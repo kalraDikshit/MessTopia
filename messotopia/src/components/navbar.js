@@ -10,7 +10,8 @@ export class CustomNavBar extends Component{
     constructor(){
         super();
         this.state = {
-            showModal:false
+            showModal:false,
+            islogged:false
         }
     }
 
@@ -21,18 +22,23 @@ export class CustomNavBar extends Component{
         this.setState({ showModal: false });
     }
 
+    logout(){
+        UserProfile.setUser({name:"",id:null,level:null});
+        this.setState({islogged:false})
+    }
+
     submitForm(e){
         e.preventDefault();
         const url = 'http://localhost:5000';
-        console.log(window.document.getElementById('email'))
         axios.post(url+'/api/login',{
             level:"0",
             email:window.document.getElementById('email').value,
             password:window.document.getElementById('password').value,
         }).then(function(res){
-            console.log(res);
-            UserProfile.setUser({name:res.response,id:res.response,level:"0"});
-        }).catch(function(error){
+            console.log(res.data.response);
+            UserProfile.setUser({name:res.data.response.name,id:res.data.response.id,level:"0"});
+            this.setState({ showModal: false,islogged:true});
+        }.bind(this)).catch(function(error){
             console.log(error);
         });
     }
@@ -59,7 +65,7 @@ export class CustomNavBar extends Component{
                     </Nav>
                     <Nav pullRight>
                     {this.props.user.getUser().id!=null && <NavItem eventKey={1} href={'/profile'}>{this.props.user.getUser().name}</NavItem> }
-                    { this.props.user.getUser().id!=null && <NavItem eventKey={2} onClick={this.props.user.setUser({"name":null,"level":null,"name":""})} href='#'>Logout</NavItem>
+                    { this.props.user.getUser().id!=null && <NavItem eventKey={2} onClick={this.logout.bind(this)} href='#'>Logout</NavItem>
                         }
                         {this.props.user.getUser().id===null && <NavItem eventKey={2} href='#' onClick={this.on.bind(this)}>Login</NavItem>}   
                         <Modal show={this.state.showModal} onHide={this.close.bind(this)} className="loginmodal-container">
