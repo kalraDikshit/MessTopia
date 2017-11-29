@@ -5,13 +5,9 @@ import axios from 'axios';
 import UserProfile from './userProfile';
 import { Link } from 'react-router-dom';
 
-import {withRouter} from 'react-router-dom';
-
-
-class CustomNavBar extends Component{
-
-    constructor(){
-        super();
+export default class CustomNavBar extends Component{
+    constructor(props){
+        super(props);
         this.state = {
             showModal:false,
             islogged:false,
@@ -40,7 +36,7 @@ class CustomNavBar extends Component{
             password:window.document.getElementById('password').value,
         }).then(function(res){
             console.log(res.data.response);
-            if(res.data.response.success==1){
+            if(res.data.response.success===1){
                 UserProfile.setUser({name:res.data.response.name,id:res.data.response.id,level:"0"});
                 this.setState({ showModal: false,islogged:true});
                 this.props.history.push('/profile');
@@ -65,14 +61,6 @@ class CustomNavBar extends Component{
                     <Nav>
                         <NavItem eventkey={1} className="linkItem"><Link to="/about" >About</Link></NavItem>
                         {this.props.user.getUser().id!=null && <NavItem eventKey={3} className="linkItem" ><Link to="/menu">Menu</Link></NavItem> }
-                        {/* <NavItem eventKey={2} href="#">Link</NavItem>
-                        <NavDropdown eventKey={3} title="Dropdown" id="basic-nav-dropdown">
-                            <MenuItem eventKey={3.1}>Action</MenuItem>
-                            <MenuItem eventKey={3.2}>Another action</MenuItem>
-                            <MenuItem eventKey={3.3}>Something else here</MenuItem>
-                            <MenuItem divider />
-                            <MenuItem eventKey={3.3}>Separated link</MenuItem>
-                        </NavDropdown> */}
                     </Nav>
                     <Nav pullRight>
                     {this.props.user.getUser().id!=null && <NavItem eventKey={3} className="linkItem" ><Link to="/profile">{this.props.user.getUser().name}</Link></NavItem> }
@@ -105,8 +93,3 @@ class CustomNavBar extends Component{
         )
     }
 }
-
-
-
-
-export default withRouter(CustomNavBar);

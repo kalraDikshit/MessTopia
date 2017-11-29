@@ -5,7 +5,7 @@ export default class About extends Component{
         return(
             <div>
                 <p>We made it.</p>
-                </div>
+            </div>
         )
     }
 }

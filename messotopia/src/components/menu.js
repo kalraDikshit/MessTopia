@@ -4,14 +4,13 @@ import axios from 'axios';
 // import  from 'react-router-dom';
 
 export default class Menu extends Component{
-    
     constructor(props){
         super(props);
         this.state ={
             data:[],
         }
         const url = 'http://localhost:5000';
-        if(this.props.user !== undefined && this.props.user.getUser().id!=null){
+        if(this.props.user !== undefined && this.props.user.getUser().id!==null){
             axios.get(url + '/api/stdetail/'+props.user.getUser().id).then(function(result){
                 const hostel = result.data.response[0].hostelName;
                 axios.get(url+'/api/messmenu/'+hostel).then(function(res){       
