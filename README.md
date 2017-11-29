@@ -11,23 +11,23 @@ Every month 180 kg of food was wasted in Hostel J's mess in the year 2016-17. Th
 ## Installation
 
 #Step 1
-Install Mysql from MAMP, LAMP or XAMPP. Import the 'db.sql' file from the repo to PHP MyAdmin.
-Keep the msyql running.
+Install Mysql from MAMP, LAMP or XAMPP. <br/>Create a new database named messotopia.<br/>Import the 'db.sql' file from the repo to PHP MyAdmin.<br/>
+Keep the mysql running.<br/>
 #Step 2
-Install NodeJS and npm. 
-    0. Open folder in terminal.
-    1. cd api
-    2. npm install
-    3. Open server.js and change the mysql credentials according to your machine(username,password,database name, host)
-    4. npm start
-This will start the server.
+Install NodeJS and npm. <br/>
+    0. Open folder in terminal.<br/>
+    1. cd api<br/>
+    2. npm install<br/>
+    3. Open server.js and change the mysql credentials according to your machine(username,password,database name, host)<br/>
+    4. npm start<br/>
+This will start the server.<br/>
 #Step 3
-Install ReactJS.
-    0. Open folder in terminal
-    1. cd messotopia
-    2. npm install
-    3. npm start
-This will open the webpage.
+Install ReactJS.<br/>
+    0. Open folder in terminal<br/>
+    1. cd messotopia<br/>
+    2. npm install<br/>
+    3. npm start<br/>
+This will open the webpage.<br/>
 
 ## Tests
 
