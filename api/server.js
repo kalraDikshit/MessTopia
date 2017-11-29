@@ -74,6 +74,32 @@ app.get('/api/messmenu/:hostelname',function(req,res,next){
     })
 });
 
+app.get('/api/latesteat/:date/:meal',function(req,res,next){
+    pool.getConnection(function(err,connection){
+        if(err){throw err};
+        connection.query(`Select st.* from stDetails st where st.id not in (Select lm.id from latestmeal lm where date="${req.params.date}" and meal="${req.params.meal}")`,function(error,results,fields){
+            connection.release();
+            if(error){res.send(JSON.stringify({"status":500,"error":error,"response":null}))}
+            else{
+                res.send(JSON.stringify({"status":200,"error":null,"response":results}));
+            }
+        });
+    })
+});
+
+app.get('/api/latestmeal/:id/:date/:meal',function(req,res,next){
+    pool.getConnection(function(err,connection){
+        if(err){throw err};
+        connection.query(`Select * from latestmeal where id = "${req.params.id}" and date = "${req.params.date} and meal =${meal}"`,function(error,results,fields){
+            connection.release();
+            if(error){res.send(JSON.stringify({"status":500,"error":error,"response":null}))}
+            else{
+                res.send(JSON.stringify({"status":200,"error":null,"response":results}));
+            }
+        });
+    })
+});
+
 //POST Requests
 
 app.post('/api/signup',function(req,res,next){
@@ -133,6 +159,19 @@ app.post('/api/login',function(req,res,next){
             }
         });
     });
+});
+
+app.post('/api/latestmeal',function(req,res,next){
+    pool.getConnection(function(err,connection){
+        if(err){throw err};
+        connection.query(`Insert into latestmeal(id,date,hostel,meal) Values(${req.body.id},"${req.body.date}","${req.body.hostel}","${req.body.meal}")`,function(error,results,fields){
+            connection.release();
+            if(error){res.send(JSON.stringify({"status":500,"error":error,"response":null}))}
+            else{
+                res.send(JSON.stringify({"status":200,"error":null,"response":results}));
+            }
+        });
+    })
 });
 
 //Delete requests
@@ -210,7 +249,17 @@ app.put('/api/uppass/',function(req,res){
 });
 
 
-
+app.delete('/api/latestmeal/:id/:date/:meal',function(req,res){
+    pool.getConnection(function(err,connection){
+        connection.query(`Delete from latestmeal where id=${req.params.id} and date="${req.params.date}" and meal="${req.params.meal}"`,function(error,results,fields){
+            connection.release();
+            if(error){res.send(JSON.stringify({"status":500,"error":error,"response":null}))}
+            else{
+                res.send(JSON.stringify({"status":500,"error":null,"response":results}));   
+            }
+        });
+    });
+});
 
 
 const server = app.listen(PORT,()=>{
