@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import {Table} from 'react-bootstrap';
 import axios from 'axios';
+import UserProfile from './userProfile';
 // import  from 'react-router-dom';
 
 export default class Menu extends Component{
@@ -10,8 +11,8 @@ export default class Menu extends Component{
             data:[],
         }
         const url = 'http://localhost:5000';
-        if(this.props.user !== undefined && this.props.user.getUser().id!==null){
-            axios.get(url + '/api/stdetail/'+props.user.getUser().id).then(function(result){
+        if(UserProfile.getUser().id !== undefined && UserProfile.getUser().id!==null){
+            axios.get(url + '/api/stdetail/'+UserProfile.getUser().id).then(function(result){
                 const hostel = result.data.response[0].hostelName;
                 axios.get(url+'/api/messmenu/'+hostel).then(function(res){       
                     res.data.response.map(function(day,i){
