@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import {FormGroup,FormControl,Table} from 'react-bootstrap';
-import {FaCheck, FaClose} from 'react-icons/lib/fa';
 
 export default class Home extends Component{
     
@@ -41,8 +40,9 @@ export default class Home extends Component{
             let roll = student.rollNo.toString();
             let firstName = student.name.split(' ')[0].toString().toLowerCase();
             let lastName = student.name.split(' ')[1].toString().toLowerCase();
+            let hostel = student.hostelName.toLowerCase();
             let filterText = this.state.filterText.toString().toLowerCase();
-            if(roll.includes(filterText) || firstName.includes(filterText) || lastName.includes(filterText) || (firstName+" "+lastName).includes(filterText) ){
+            if(roll.includes(filterText) || firstName.includes(filterText) || lastName.includes(filterText) || (firstName+" "+lastName).includes(filterText) || hostel.includes(filterText) ){
                 updatedTable.push(( <tr key = {i++}><td>{i}</td><td>{student.rollNo}</td><td>{student.name.split(' ')[0]}</td><td>{student.name.split(' ')[1]}</td><td>{student.hostelName}</td></tr>));
             }
         }.bind(this));
@@ -54,7 +54,7 @@ export default class Home extends Component{
             <div>
             <form className = "col-xs-12 col-lg-4 col-lg-offset-4">
               <FormGroup>
-                  <FormControl type="text" id="filter" onChange = {this.handleUpdateInput.bind(this)} placeholder = "Enter Roll No. | Name"/>
+                  <FormControl type="text" id="filter" onChange = {this.handleUpdateInput.bind(this)} placeholder = "Enter Roll No. | Name | Hostel"/>
               </FormGroup>
             </form>  
             {!this.state.isLoading && <Table striped bordered condensed hover>
