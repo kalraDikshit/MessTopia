@@ -90,11 +90,13 @@ app.get('/api/latesteat/:date/:meal',function(req,res,next){
 app.get('/api/latestmeal/:id/:date/:meal',function(req,res,next){
     pool.getConnection(function(err,connection){
         if(err){throw err};
-        connection.query(`Select * from latestmeal where id = "${req.params.id}" and date = "${req.params.date} and meal =${meal}"`,function(error,results,fields){
+        connection.query(`Select * from latestmeal where id = "${req.params.id}" and date = "${req.params.date}" and meal ="${req.params.meal}"`,function(error,results,fields){
             connection.release();
             if(error){res.send(JSON.stringify({"status":500,"error":error,"response":null}))}
             else{
-                res.send(JSON.stringify({"status":200,"error":null,"response":results}));
+                if(results.length===0)
+                    res.send(JSON.stringify({"status":200,"error":null,"response":[]}));
+                else res.send(JSON.stringify({"status":200,"error":null,"response":results}));
             }
         });
     })

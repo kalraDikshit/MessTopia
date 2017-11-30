@@ -3,12 +3,12 @@ import {Table, Button} from 'react-bootstrap';
 import axios from 'axios';
 import UserProfile from './userProfile';
 
-export default class About extends Component{
+export default class StudentDashboard extends Component{
     constructor(props){
         super(props);
         this.state = {
             data:{},
-            btn:{},
+            btn:"",
             isEating:true
         }
         const url = 'http://localhost:5000';
@@ -22,10 +22,11 @@ export default class About extends Component{
                 console.log(error);
             })
             var d = new Date();
+            var hr = d.getHours();
             var meal = d.getHours()<12?'Lunch':'Dinner';
             var date = (d.getFullYear()+"-"+(d.getMonth()+1)+"-"+d.getDate());
             console.log(date);
-            if((Date().split(' ')[4].split(':')[0]>10 && Date().split(' ')[4].split(':')[0]<12) || (Date().split(' ')[4].split(':')[0]>16 && Date().split(' ')[4].split(':')[0]<18)){
+            if((hr>=8 && hr<10) || (hr>=16 && hr<18)){
                 axios.get(url+'/api/latestmeal/'+UserProfile.getUser().id+'/'+(date)+'/'+meal).then(function(result){
                     console.log(result);
                     if(result.data.response.length===1){
@@ -50,11 +51,12 @@ export default class About extends Component{
     }
     
     eat(){
+        const url = 'http://localhost:5000';
         var d = new Date();
         var meal = d.getHours()<12?'Lunch':'Dinner';
         var date = (d.getFullYear()+"-"+(d.getMonth()+1)+"-"+d.getDate());
         if(this.state.isEating){
-            axios.post('/api/latestmeal',{
+            axios.post(url+'/api/latestmeal',{
                 id:UserProfile.getUser().id,
                 date:date,
                 hostel:this.state.hostelName,
@@ -69,7 +71,7 @@ export default class About extends Component{
                 console.log(error);
             })
         }else{
-            axios.delete(`/api/latestmeal/${UserProfile.getUser().id}/${date}/${meal}`).then(function(response){
+            axios.delete(url+`/api/latestmeal/${UserProfile.getUser().id}/${date}/${meal}`).then(function(response){
                 console.log(response);
                 this.setState({
                     isEating:true,
@@ -82,6 +84,11 @@ export default class About extends Component{
     }
     
     render(){
+        var bt = false;
+        var d = new Date();
+        var hr = d.getHours();
+        { bt = ((hr>=8 && hr<10) || (hr>=16 && hr<18))? true:false}
+        console.log(bt);
         return(
             <div>
                 <Table striped bordered condensed hover responsive>
@@ -114,10 +121,8 @@ export default class About extends Component{
                 <div className="row">
                     <div className = "col-xs-12 col-md-12">
                         <h3>Update Next Meal Status</h3>
-
-                        {((Date().split(' ')[4].split(':')[0]>10 && Date().split(' ')[4].split(':')[0]<12) || (Date().split(' ')[4].split(':')[0]>16 && Date().split(' ')[4].split(':')[0]<18))?
-                        <Button className="btn btn-warning" onClick={this.eat.bind(this)}>{this.state.btn}</Button>:'Portal is closed.'}
-                        
+                        {bt && <Button key={1} className="btn btn-warning" onClick={this.eat.bind(this)}>{this.state.btn}</Button>}
+                        {!bt && <p>The Portal is closed. It will between open 8A.M.-10A.M. and 4P.M.-6P.M.</p>}
                     </div>
                 </div>
             </div>
