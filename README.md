@@ -36,7 +36,8 @@ This will start the server.<br/>
     </ul>
 This will open the webpage.<br/>
 <br/>
-#Use Given Username and password to login into the system.
+#Credentials
+Use Given Username and password to login into the system.
 <ul>
 <li>Email:bchhabra2490@gmail.com</li>
 <li>Password:abcde</li>
