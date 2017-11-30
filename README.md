@@ -17,9 +17,9 @@ Keep the mysql running.<br/>
 <h4>Install NodeJS and npm.</h4> <br/>
     <ul>
    <li> 0. Open folder in terminal.</li>
-    <li>1. cd api</li>
-    <li>2. npm install</li>
-   <li> 3. Open server.js and change the mysql credentials according to your machine(username,password,database name, host)</li>
+    <li>1. <code>cd api</code></li>
+    <li>2. <code>npm install</code></li>
+   <li> 3. Open components/dbconnection.js and change the mysql credentials according to your machine(username,password,database name, host)</li>
     <li>4. npm start</li>
     </ul>
 This will start the server.<br/>
@@ -27,9 +27,9 @@ This will start the server.<br/>
 <h4>Install ReactJS.</h4><br/>
     <ul>
     <li>0. Open folder in terminal</li>
-    <li>1. cd messotopia</li>
-    <li>2. npm install</li>
-    <li>3. npm start</li>
+    <li>1. <code>cd messotopia</code></li>
+    <li>2. <code>npm install</code></li>
+    <li>3. <code>npm start</code></li>
     </ul>
 This will open the webpage.<br/>
 <br/><br/>
