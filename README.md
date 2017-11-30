@@ -14,6 +14,7 @@ Every month 180 kg of food was wasted in Hostel J's mess in the year 2016-17. Th
 <ul>
 <li>Install Mysql from MAMP, LAMP or XAMPP. </li><li>Create a new database named messotopia.</li><li>Import the 'db.sql' file from the repo to PHP MyAdmin.</li>
 <li>Keep the mysql running.</li>
+</ul>    
     </br>
 #Step 2
 <h4>Install NodeJS and npm.</h4> <br/>
