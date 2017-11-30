@@ -23,12 +23,17 @@ Install NodeJS and npm. <br/>
 This will start the server.<br/>
 #Step 3
 Install ReactJS.<br/>
-    0. Open folder in terminal<br/>
-    1. cd messotopia<br/>
-    2. npm install<br/>
-    3. npm start<br/>
+    <ul>
+    <li>0. Open folder in terminal</li>
+    <li>1. cd messotopia</li>
+    <li>2. npm install</li>
+    <li>3. npm start</li>
+    </ul>
 This will open the webpage.<br/>
-
+<br/><br/>
+Use Given Username and password to login into the system.
+Email:bchhabra2490@gmail.com<br>
+Password:abcde<br>
 ## Tests
 
 To be added with Projects's Progress.
