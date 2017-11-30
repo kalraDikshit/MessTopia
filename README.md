@@ -11,8 +11,10 @@ Every month 180 kg of food was wasted in Hostel J's mess in the year 2016-17. Th
 ## Installation
 
 #Step 1
-Install Mysql from MAMP, LAMP or XAMPP. <br/>Create a new database named messotopia.<br/>Import the 'db.sql' file from the repo to PHP MyAdmin.<br/>
-Keep the mysql running.<br/>
+<ul>
+<li>Install Mysql from MAMP, LAMP or XAMPP. </li><li>Create a new database named messotopia.</li><li>Import the 'db.sql' file from the repo to PHP MyAdmin.</li>
+<li>Keep the mysql running.</li>
+    </br>
 #Step 2
 <h4>Install NodeJS and npm.</h4> <br/>
     <ul>
@@ -32,10 +34,12 @@ This will start the server.<br/>
     <li>3. <code>npm start</code></li>
     </ul>
 This will open the webpage.<br/>
-<br/><br/>
-Use Given Username and password to login into the system.<br>
-Email:bchhabra2490@gmail.com<br>
-Password:abcde<br>
+<br/>
+#Use Given Username and password to login into the system.
+<ul>
+<li>Email:bchhabra2490@gmail.com</li>
+<li>Password:abcde</li>
+
 ## Tests
 
 To be added with Projects's Progress.
