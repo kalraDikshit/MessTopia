@@ -11,6 +11,7 @@ export default class StudentDashboard extends Component{
             btn:"",
             isEating:true
         }
+        // Star here.
         const url = 'http://localhost:5000';
         if(UserProfile.getUser().id !== undefined && UserProfile.getUser().id!==null && UserProfile.getUser().level!==0){
             axios.get(url+'/api/stdetail/'+UserProfile.getUser().id).then(function(result){
@@ -50,7 +51,9 @@ export default class StudentDashboard extends Component{
         }
     }
     
+    //User login starrt here
     eat(){
+        const pp = 'admin_289';
         const url = 'http://localhost:5000';
         var d = new Date();
         var meal = d.getHours()<12?'Lunch':'Dinner';
