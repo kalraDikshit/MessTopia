@@ -14,6 +14,10 @@ class App extends Component {
   render() {
     return (
       <div className="App">
+      <div>
+      // Contract for admin space
+      // Total reg dem count here
+      </div>
         <CustomNavBar user = {UserProfile} history = {this.props.history} />
           <Switch> 
             {/* <Route exact path={"/"} component={CustomNavBar}> */}
