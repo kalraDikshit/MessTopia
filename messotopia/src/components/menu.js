@@ -11,6 +11,7 @@ export default class Menu extends Component{
             data:[],
         }
         const url = 'http://localhost:5000';
+        const prop = 'http://localhost:1234';
         if(UserProfile.getUser().id !== undefined && UserProfile.getUser().id!==null && UserProfile.getUser().level!==0){
             axios.get(url + '/api/stdetail/'+UserProfile.getUser().id).then(function(result){
                 const hostel = result.data.response[0].hostelName;
@@ -37,6 +38,7 @@ export default class Menu extends Component{
         }
     }
     
+    // Rend here.
     render(){
         return(
             <Table striped bordered condensed hover>
