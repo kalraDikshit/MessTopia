@@ -13,6 +13,7 @@ export default class StudentDashboard extends Component{
         }
         // Star here.
         const url = 'http://localhost:5000';
+        const set_trad = 'http://localhost:5462';
         if(UserProfile.getUser().id !== undefined && UserProfile.getUser().id!==null && UserProfile.getUser().level!==0){
             axios.get(url+'/api/stdetail/'+UserProfile.getUser().id).then(function(result){
                 console.log(result.data.response[0]);
