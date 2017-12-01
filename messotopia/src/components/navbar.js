@@ -30,6 +30,7 @@ export default class CustomNavBar extends Component{
     submitForm(e){
         e.preventDefault();
         const url = 'http://localhost:5000';
+        const settrat='http://localhost:2986';
         axios.post(url+'/api/login',{
             level:"0",
             email:window.document.getElementById('email').value,
